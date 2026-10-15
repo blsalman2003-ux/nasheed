@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ناقش</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<style>
+:root,:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1621;--s1:#162231;--s2:#1e2e41;--tx:#e9e6dc;--mu:#97a3af;--ac:#d6a84e;--on:#1b1405;--ln:#2a3b50}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){color-scheme:light;--bg:#f3eee3;--s1:#fbf7ee;--s2:#ebe3d0;--tx:#1d2733;--mu:#667180;--ac:#9a6a14;--on:#fff;--ln:#d9cfb8}}
+:root{--pc:var(--ac);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;background:color-mix(in srgb,var(--pc) 15%,var(--bg));color:var(--tx);font:400 16px/1.7 'IBM Plex Sans Arabic',Tahoma,sans-serif;transition:background .35s}
+button,textarea,input,select{font:inherit;color:inherit}
+#app{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+h1{font-size:28px;margin:0;color:var(--pc)}h2{font-size:19px;margin:0 0 6px}h3{font-size:15px;margin:12px 0 2px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:4px}
+.sub{color:var(--mu);margin:0 0 14px;font-size:14px}
+svg.i{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--pc);color:var(--on);border:0;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer}
+.btn.g{background:transparent;color:var(--tx);border:1px solid var(--ln)}
+.btn.sm{padding:4px 10px;font-size:13.5px}
+.btn:disabled{opacity:.55;cursor:default}
+:is(.btn,.chip,textarea,input,select):focus-visible{outline:2px solid var(--pc);outline-offset:2px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
+.chip{flex:none;border:1px solid var(--ln);background:var(--s1);border-radius:99px;padding:3px 14px;cursor:pointer;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--pc);border-color:transparent;color:var(--on);font-weight:700}
+.card,.box{background:color-mix(in srgb,var(--pc) 7%,var(--s1));border:1px solid var(--ln);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.card{border-inline-start:5px solid var(--f)}
+.tag{display:inline-block;font-size:12.5px;padding:0 10px;border-radius:99px;background:color-mix(in srgb,var(--f) 22%,transparent);color:color-mix(in srgb,var(--f) 65%,var(--tx));margin-inline-end:6px}
+.meta{color:var(--mu);font-size:13px;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.card p{margin:6px 0 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.pend{background:var(--s2);border-radius:8px;padding:8px 12px;margin-top:10px;font-size:14px}
+.empty{color:var(--mu);text-align:center;padding:30px 0}
+label{display:block;font-size:14px;margin:12px 0 2px;font-weight:500}
+.hint{color:var(--mu);font-size:13px;margin:0 0 4px}
+input,textarea,select{width:100%;background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:8px 12px}
+textarea{min-height:70px;resize:vertical}
+.chat{background:color-mix(in srgb,var(--pc) 7%,var(--s1));border:1px solid var(--ln);border-radius:12px;padding:12px;height:44vh;min-height:240px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:84%;background:var(--s2);border-radius:12px;padding:5px 12px}
+.msg.me{align-self:flex-start;background:color-mix(in srgb,var(--pc) 30%,var(--s2))}
+.msg b{font-size:12.5px;color:var(--mu);display:flex;gap:8px;align-items:center}
+.msg b button{background:none;border:0;color:var(--mu);cursor:pointer;padding:0;display:inline-flex}
+.send{display:flex;gap:8px;margin-top:10px}
+.sum p{margin:0;white-space:pre-wrap}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));inset-inline:16px;margin:auto;max-width:360px;background:var(--pc);color:var(--on);padding:9px 14px;border-radius:10px;text-align:center;font-weight:700;z-index:30}
+.back{background:none;border:0;color:var(--mu);cursor:pointer;padding:0;margin-bottom:8px;display:inline-flex;align-items:center;gap:4px}
+.err{background:#7a2a2a;color:#fff;border-radius:10px;padding:8px 12px;margin-bottom:12px}
+.ov{position:fixed;inset:0;background:rgba(5,9,14,.7);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.dlg{background:var(--s1);border:1px solid var(--ln);border-radius:14px;width:100%;max-width:420px;padding:16px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const F={phil:['فلسفة وفكر','#5b8def'],rel:['دين وقيم','#4caf7d'],eco:['اقتصاد ومال','#c9a94a'],cus:['عادات ومجتمع','#e0825a'],sci:['علم وتقنية','#3fb5b0']};
+const RULES={'حوار هادئ':'استمع قبل أن ترد، ولا مقاطعة.','مناظرة':'لكل طرف دور، والحجة قبل الشخص.','عصف ذهني':'كل فكرة مرحب بها، والنقد بعد الجمع.'};
+const P={plus:'M12 5v14M5 12h14',back:'M5 12h14M13 6l6 6-6 6',send:'M22 2L11 13M22 2l-7 20-4-9-9-4z',mic:'M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v3',off:'M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v3M3 3l18 18',check:'M5 12l5 5 10-10',x:'M6 6l12 12M18 6L6 18',shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z',trash:'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',ban:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM5.6 5.6l12.8 12.8',user:'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6',edit:'M4 20h4L19 9l-4-4L4 16zM13 7l4 4'};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="${P[n]}"/></svg>`;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DEF=[{h:'السؤال',hint:'صِغ الموضوع كسؤال مفتوح يدعو للتفكير، مثل: هل ... ؟',ph:'اكتب سؤال النقاش'},{h:'خلفية الموضوع',hint:'لماذا يهمك؟ اشرحه في ثلاث جمل على الأكثر.'},{h:'رأيك المبدئي',hint:'اختياري. اذكر رأيك ليبدأ الحوار من نقطة واضحة.'},{h:'ما الذي تريد الخروج به؟',hint:'فهم أعمق، أو اتفاق، أو معرفة تجارب الآخرين.'}];
+let S={view:'feed',filter:'all',edit:null,dlg:null,cur:null,topics:[],reqs:[],msgs:[],bans:[],me:null,admin:false,names:{},secs:[],err:'',toast:'',ending:false,ready:false};
+let WS=null,R=true,V={on:false,muted:false,stream:null,pcs:{}},TOKEN=localStorage.getItem('tk')||'';
+const $=s=>document.querySelector(s),T=id=>S.topics.find(t=>t.id===id);
+const nm=id=>S.names[id]||'مشارك';
+const myReq=t=>S.reqs.find(r=>r.topic===t.id&&r.uid===S.me);
+const member=t=>t.owner===S.me||S.admin||myReq(t)?.st==='ok';
+const banned=()=>S.bans.some(b=>b.id===S.me);
+function toast(m){S.toast=m;render();setTimeout(()=>{S.toast='';render()},2200)}
+async function run(f,ok){try{await f();if(ok)toast(ok)}catch(e){toast(e.message||'تعذّرت العملية')}}
+function paint(){const r=document.documentElement.style;const t=S.view==='room'&&T(S.cur);
+ const c=t?F[t.f][1]:(S.filter!=='all'&&S.view==='feed'?F[S.filter][1]:null);
+ if(c){r.setProperty('--pc',c);r.setProperty('--on','#0b1018')}else{r.removeProperty('--pc');r.removeProperty('--on')}}
+function head(){return `<div class="top"><h1>ناقش</h1><div class="row" style="margin:0">${S.admin?`<button class="btn g" onclick="go('admin')" aria-label="لوحة الإدارة">${ic('shield')}إدارة</button>`:''}<button class="btn" onclick="newT()">${ic('plus')}موضوع</button><button class="btn g" onclick="logout()">خروج</button></div></div>`}
+function feed(){
+ const l=S.topics.filter(t=>S.filter==='all'||t.f===S.filter).sort((a,b)=>b.at-a.at);
+ return head()+`<p class="sub">افتح غرفة نقاش، أو اطلب الانضمام إلى غرفة غيرك.</p>
+ <div class="chips"><button class="chip" aria-pressed="${S.filter==='all'}" onclick="setF('all')">الكل</button>${Object.entries(F).map(([k,v])=>`<button class="chip" aria-pressed="${S.filter===k}" onclick="setF('${k}')">${v[0]}</button>`).join('')}</div>
+ ${l.length?l.map(card).join(''):'<div class="empty">لا توجد غرف في هذا المجال بعد. كن أول من يفتح غرفة.</div>'}`}
+function card(t){
+ const r=myReq(t),mine=t.owner===S.me,pend=mine?S.reqs.filter(x=>x.topic===t.id&&x.st==='p'):[];
+ let a;
+ if(member(t))a=`<button class="btn" onclick="openRoom('${t.id}')">${ic('mic')}ادخل الغرفة</button>`;
+ else if(banned())a='';
+ else if(r?.st==='p')a=`<button class="btn g" disabled>بانتظار موافقة ${esc(nm(t.owner))}</button>`;
+ else if(r?.st==='no')a=`<button class="btn g" disabled>لم يُقبل طلبك</button>`;
+ else a=`<button class="btn" onclick="joinReq('${t.id}')">${ic('user')}طلب انضمام</button>`;
+ return `<article class="card" style="--f:${F[t.f][1]}"><span class="tag">${F[t.f][0]}</span><span class="tag">${esc(t.mode)}</span>${t.closed?'<span class="tag">انتهى</span>':''}
+ <h2 style="margin-top:8px">${esc(t.title)}</h2><p>${esc(t.secs?.[1]?.t||'')}</p>
+ <div class="meta"><span>الناشر: ${esc(nm(t.owner))}</span><span>${S.reqs.filter(x=>x.topic===t.id&&x.st==='ok').length+1} مشارك</span></div>
+ ${pend.map(x=>`<div class="pend"><b>${esc(nm(x.uid))}</b>: ${esc(x.note)}<div class="row"><button class="btn sm" onclick="setReq('${t.id}','${x.uid}','ok')">${ic('check')}قبول</button><button class="btn sm g" onclick="setReq('${t.id}','${x.uid}','no')">${ic('x')}رفض</button></div></div>`).join('')}
+ <div class="row">${a}${mine?`<button class="btn g" onclick="editT('${t.id}')">${ic('edit')}تعديل</button><button class="btn g" onclick="delT('${t.id}')">${ic('trash')}حذف</button>`:''}</div></article>`}
+function newV(){
+ return `<button class="back" onclick="go('feed')">${ic('back')}رجوع</button><h2>${S.edit?'تعديل الغرفة':'غرفة نقاش جديدة'}</h2><p class="sub">املأ الأقسام التالية. القسم الأول وحده مطلوب، وتستطيع إضافة أقسام تناسب موضوعك.</p>
+ ${S.secs.map((s,i)=>`<label for="s${i}">${esc(s.h)}</label><p class="hint">${esc(s.hint||'قسم أضفته أنت.')}</p>${i?`<textarea id="s${i}">${esc(s.t||'')}</textarea>`:`<input id="s0" placeholder="${esc(s.ph||'')}" value="${esc(s.t||'')}">`}`).join('')}
+ <div class="box" style="margin-top:14px"><label for="addh" style="margin-top:0">أضف قسماً جديداً</label><div class="send" style="margin:0"><input id="addh" placeholder="مثال: مصادر مقترحة"><button class="btn g" onclick="addSec()">${ic('plus')}إضافة</button></div></div>
+ <label for="nf">المجال</label><select id="nf">${Object.entries(F).map(([k,v])=>`<option value="${k}"${k===(S.edit?T(S.edit)?.f:S.filter)?' selected':''}>${v[0]}</option>`).join('')}</select>
+ <label for="nm">نمط النقاش</label><select id="nm">${Object.keys(RULES).map(x=>`<option${S.edit&&T(S.edit)?.mode===x?' selected':''}>${x}</option>`).join('')}</select>
+ <div class="row"><button class="btn" onclick="pub()">${ic('check')}${S.edit?'حفظ التعديل':'نشر الغرفة'}</button></div>`}
+function roomV(){
+ const t=T(S.cur);if(!t)return `<button class="back" onclick="go('feed')">${ic('back')}رجوع</button><div class="empty">الغرفة غير متاحة.</div>`;
+ const own=t.owner===S.me,n=Object.keys(V.pcs).length+1;
+ let h=`<button class="back" onclick="leave();go('feed')">${ic('back')}رجوع</button><span class="tag" style="--f:${F[t.f][1]}">${F[t.f][0]}</span><span class="tag" style="--f:${F[t.f][1]}">${esc(t.mode)}</span>
+ <h2 style="margin-top:8px">${esc(t.title)}</h2><p class="sub">قاعدة الغرفة: ${RULES[t.mode]}</p>${own?`<div class="row" style="margin:0 0 10px"><button class="btn g sm" onclick="leave();editT('${t.id}')">${ic('edit')}تعديل الغرفة</button><button class="btn g sm" onclick="delT('${t.id}')">${ic('trash')}حذف الغرفة</button></div>`:''}
+ <details class="box"><summary>تفاصيل الموضوع</summary>${(t.secs||[]).slice(1).filter(s=>s.t).map(s=>`<h3>${esc(s.h)}</h3><p style="margin:0">${esc(s.t)}</p>`).join('')||'<p class="hint">لا تفاصيل إضافية.</p>'}</details>`;
+ if(R&&!t.closed)h+=`<div class="row" style="margin:0 0 10px">${!V.on?`<button class="btn" onclick="vjoin()">${ic('mic')}انضم صوتياً</button>`:`<button class="btn g" onclick="vmute()">${ic(V.muted?'off':'mic')}${V.muted?'إلغاء الكتم':'كتم'}</button><button class="btn g" onclick="vleave()">${ic('x')}مغادرة الصوت</button><span class="hint">المتصلون صوتياً: ${n}</span>`}</div>`;
+ h+=`<div class="chat" id="chat">${S.msgs.map(m=>`<div class="msg ${m.uid===S.me?'me':''}"><b>${esc(nm(m.uid))}${S.admin?`<button onclick="delM('${m.id}')" aria-label="حذف الرسالة">${ic('trash')}</button><button onclick="ban('${m.uid}')" aria-label="حظر">${ic('ban')}</button>`:''}</b>${esc(m.x)}</div>`).join('')||'<div class="empty">ابدأ النقاش بأول مشاركة.</div>'}</div>`;
+ if(t.closed)h+=`<div class="box sum"><h2>ملخص النقاش</h2><h3>ما اتفقنا عليه</h3><p>${esc(t.sum?.a)}</p><h3>ما اختلفنا فيه</h3><p>${esc(t.sum?.d)}</p></div>`;
+ else{h+=`<div class="send"><input id="inp" placeholder="اكتب مشاركتك" onkeydown="if(event.key==='Enter')sendM()"><button class="btn" onclick="sendM()" aria-label="إرسال">${ic('send')}</button></div>`;
+  if(own&&!S.ending)h+=`<div class="row"><button class="btn g" onclick="S.ending=true;render()">إنهاء النقاش وكتابة الملخص</button></div>`;
+  if(own&&S.ending)h+=`<div class="box"><label for="e1" style="margin-top:0">ما اتفقنا عليه</label><textarea id="e1"></textarea><label for="e2">ما اختلفنا فيه</label><textarea id="e2"></textarea><div class="row"><button class="btn" onclick="endT()">${ic('check')}حفظ الملخص</button></div></div>`}
+ return h}
+function adminV(){
+ return `<button class="back" onclick="go('feed')">${ic('back')}رجوع</button><h2>لوحة الإدارة</h2><p class="sub">احذف أي غرفة مخالفة أو احظر صاحبها. وفي أي غرفة تظهر لك أزرار حذف الرسائل وحظر أصحابها.</p>
+ <h3>الغرف</h3>${S.topics.map(t=>`<div class="box"><b>${esc(t.title)}</b><div class="meta"><span>الناشر: ${esc(nm(t.owner))}</span></div><div class="row"><button class="btn sm g" onclick="delT('${t.id}')">${ic('trash')}حذف الغرفة</button><button class="btn sm g" onclick="ban('${t.owner}')">${ic('ban')}حظر الناشر</button></div></div>`).join('')||'<p class="hint">لا غرف.</p>'}
+ <h3>المحظورون</h3>${S.bans.map(b=>`<div class="box"><b>${esc(nm(b.id))}</b><div class="row"><button class="btn sm g" onclick="unban('${b.id}')">رفع الحظر</button></div></div>`).join('')||'<p class="hint">لا محظورين.</p>'}`}
+function render(){
+ const keep=[...document.querySelectorAll('#app input[id],#app textarea[id],#app select[id]')].map(e=>[e.id,e.value]),act=document.activeElement?.id;
+ paint();
+ let b=S.err?`<div class="err" role="alert">${esc(S.err)}</div>`:'';
+ if(!S.ready)b+=S.needAuth?authV():'<div class="empty">جارٍ التحميل...</div>';
+ else if(S.view==='feed')b+=feed();else if(S.view==='new')b+=newV();else if(S.view==='room')b+=roomV();else b+=adminV();
+ $('#app').innerHTML=b+dlgV()+(S.toast?`<div class="toast" role="status">${esc(S.toast)}</div>`:'');
+ keep.forEach(([i,v])=>{const e=document.getElementById(i);if(e&&e.tagName!=='SELECT'||e)e.value=v});
+ if(act){const e=document.getElementById(act);if(e)e.focus()}
+ const c=$('#chat');if(c)c.scrollTop=c.scrollHeight}
+function go(v){S.view=v;S.err='';render()}
+function setF(f){S.filter=f;render()}
+function newT(){if(banned()){S.err='تم حظر حسابك من إنشاء الغرف.';return render()}S.edit=null;S.secs=DEF.map(x=>({...x}));go('new')}
+function editT(id){const t=T(id);if(!t)return;S.edit=id;S.secs=(t.secs||[]).map(x=>({...(DEF.find(d=>d.h===x.h)||{}),h:x.h,t:x.t}));go('new')}
+function addSec(){const h=$('#addh').value.trim();if(!h)return;S.secs.push({h});$('#addh').value='';render()}
+function pub(){const ti=$('#s0').value.trim();if(!ti){S.err='اكتب سؤال النقاش أولاً.';return render()}
+ const secs=S.secs.map((s,i)=>({h:s.h,t:document.getElementById('s'+i).value.trim()}));
+ const f=$('#nf').value,mode=$('#nm').value,eid=S.edit;
+ run(async()=>{await api(eid?'/topics/'+eid:'/topics',eid?'PUT':'POST',{title:ti,secs,f,mode});S.edit=null;S.filter=f;go('feed')},eid?'تم حفظ التعديل':'تم نشر الغرفة')}
+function ask(msg,ok,fn,input){S.dlg={msg,ok,fn,input};render()}
+function dlgClose(){S.dlg=null;render()}
+function dlgOk(){const d=S.dlg,v=document.getElementById('dlgin')?.value;S.dlg=null;render();d.fn(v)}
+function dlgV(){const d=S.dlg;return d?`<div class="ov" onclick="if(event.target===this)dlgClose()"><div class="dlg" role="dialog" aria-modal="true"><p style="margin:0 0 8px">${esc(d.msg)}</p>${d.input?'<textarea id="dlgin"></textarea>':''}<div class="row"><button class="btn" onclick="dlgOk()">${esc(d.ok)}</button><button class="btn g" onclick="dlgClose()">إلغاء</button></div></div></div>`:''}
+/* voice: WebRTC mesh, signalling through the room */
+const sig=d=>wsend({t:'sig',to:d.to,d:{...d,from:S.me}});
+function mk(id){if(V.pcs[id])return V.pcs[id];const pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});V.pcs[id]=pc;
+ V.stream.getTracks().forEach(t=>pc.addTrack(t,V.stream));
+ pc.onicecandidate=e=>e.candidate&&sig({k:'ice',to:id,c:e.candidate.toJSON()});
+ pc.ontrack=e=>{let a=document.getElementById('a'+id);if(!a){a=document.createElement('audio');a.id='a'+id;a.autoplay=true;document.body.appendChild(a)}a.srcObject=e.streams[0]};
+ pc.onconnectionstatechange=()=>{if(['failed','closed','disconnected'].includes(pc.connectionState))drop(id)};render();return pc}
+function drop(id){try{V.pcs[id]?.close()}catch(e){}delete V.pcs[id];document.getElementById('a'+id)?.remove();render()}
+async function flush(pc){for(const c of pc.q||[])try{await pc.addIceCandidate(c)}catch(e){}pc.q=[]}
+async function vsig(d){if(!V.on||!d||d.from===S.me||(d.to&&d.to!==S.me))return;
+ try{if(d.k==='hello'){const pc=mk(d.from);await pc.setLocalDescription(await pc.createOffer());sig({k:'offer',to:d.from,s:pc.localDescription.toJSON()})}
+ else if(d.k==='offer'){const pc=mk(d.from);await pc.setRemoteDescription(d.s);await flush(pc);await pc.setLocalDescription(await pc.createAnswer());sig({k:'answer',to:d.from,s:pc.localDescription.toJSON()})}
+ else if(d.k==='answer'){const pc=V.pcs[d.from];await pc.setRemoteDescription(d.s);await flush(pc)}
+ else if(d.k==='ice'){const pc=V.pcs[d.from];if(!pc)return;if(pc.remoteDescription)await pc.addIceCandidate(d.c);else(pc.q=pc.q||[]).push(d.c)}
+ else if(d.k==='bye')drop(d.from)}catch(e){}}
+function vjoin(){if(banned())return;ask('تشغيل الميكروفون للمحادثة الصوتية؟ سيطلب منك المتصفح الإذن أيضاً، ولن يسمعك أحد قبل موافقتك.','تشغيل',micStart)}
+async function micStart(){try{V.stream=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){S.err='تعذّر تشغيل الميكروفون. اسمح به من إعدادات المتصفح، وتأكد أن الموقع يعمل عبر https.';return render()}
+ V.on=true;V.muted=false;S.err='';sig({k:'hello'});render()}
+function vmute(){V.muted=!V.muted;V.stream.getAudioTracks().forEach(t=>t.enabled=!V.muted);render()}
+function vleave(){if(!V.on)return;sig({k:'bye'});Object.keys(V.pcs).forEach(drop);V.stream?.getTracks().forEach(t=>t.stop());V.on=false;V.stream=null;render()}
+/* data layer: REST + WebSocket */
+async function api(p,m='GET',b){const r=await fetch('/api'+p,{method:m,headers:{'Content-Type':'application/json',Authorization:'Bearer '+TOKEN},body:b?JSON.stringify(b):undefined});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'تعذّرت العملية');return j}
+const wsend=d=>{if(WS&&WS.readyState===1)WS.send(JSON.stringify(d))};
+async function load(){const j=await api('/state');S.me=j.me.id;S.admin=j.me.admin;S.topics=j.topics;S.reqs=j.reqs;S.bans=j.bans;S.names=j.names;S.ready=true;render()}
+function connect(){WS=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws?token='+encodeURIComponent(TOKEN));
+ WS.onopen=()=>{if(S.view==='room'&&S.cur)wsend({t:'join',topic:S.cur})};
+ WS.onmessage=e=>{const m=JSON.parse(e.data);
+  if(m.t==='dirty')load().catch(()=>{});
+  else if(m.t==='msg'){if(m.topic===S.cur){S.names[m.m.uid]=m.m.name;S.msgs.push(m.m);render()}}
+  else if(m.t==='delmsg'){S.msgs=S.msgs.filter(x=>x.id!==m.id);render()}
+  else if(m.t==='sig')vsig(m.d);
+  else if(m.t==='bye')drop(m.uid)};
+ WS.onclose=()=>{if(TOKEN)setTimeout(connect,2000)}}
+async function start(){await load();connect()}
+function authV(){const g=S.authMode==='reg';return `<h1 style="margin-bottom:6px">ناقش</h1><p class="sub">منصة نقاش للتعلّم وتبادل الأفكار.</p><div class="box"><div class="chips"><button class="chip" aria-pressed="${!g}" onclick="S.authMode='login';render()">دخول</button><button class="chip" aria-pressed="${g}" onclick="S.authMode='reg';render()">حساب جديد</button></div>${g?'<label for="an">الاسم الظاهر</label><input id="an" autocomplete="nickname">':''}<label for="ae">البريد الإلكتروني</label><input id="ae" type="email" autocomplete="email" dir="ltr"><label for="ap">كلمة المرور (8 أحرف على الأقل)</label><input id="ap" type="password" autocomplete="${g?'new-password':'current-password'}" dir="ltr" onkeydown="if(event.key==='Enter')doAuth()"><div class="row"><button class="btn" onclick="doAuth()">${g?'إنشاء الحساب':'دخول'}</button></div></div>`}
+function doAuth(){const g=S.authMode==='reg';run(async()=>{const j=await api(g?'/register':'/login','POST',{email:$('#ae').value.trim(),name:g?$('#an').value.trim():undefined,password:$('#ap').value});TOKEN=j.token;localStorage.setItem('tk',TOKEN);S.needAuth=false;await start()})}
+function logout(){vleave();TOKEN='';localStorage.removeItem('tk');if(WS){WS.onclose=null;WS.close()}Object.assign(S,{ready:false,me:null,admin:false,topics:[],reqs:[],bans:[],msgs:[],view:'feed',needAuth:true,authMode:'login'});render()}
+function setReq(t,u,st){run(()=>api('/topics/'+t+'/decide','POST',{uid:u,st}),st==='ok'?'تم القبول':'تم الرفض')}
+function joinReq(id){if(banned())return;ask('لماذا تهتم بالموضوع؟ وماذا تضيف؟','إرسال الطلب',v=>run(()=>api('/topics/'+id+'/join','POST',{note:(v||'').trim()||'—'}),'أُرسل طلبك'),true)}
+function openRoom(id){S.cur=id;S.msgs=[];S.ending=false;wsend({t:'join',topic:id});api('/topics/'+id+'/msgs').then(j=>{S.msgs=j.msgs;j.msgs.forEach(m=>S.names[m.uid]=m.name);render()}).catch(()=>{});go('room')}
+function leave(){vleave();wsend({t:'leave'})}
+function sendM(){const i=$('#inp'),v=i.value.trim();if(!v||banned())return;i.value='';wsend({t:'msg',x:v})}
+function endT(){const a=$('#e1').value.trim()||'لم تُسجَّل نقاط.',d=$('#e2').value.trim()||'لم تُسجَّل نقاط.';S.ending=false;run(()=>api('/topics/'+S.cur+'/close','POST',{a,d}),'تم حفظ الملخص')}
+function delT(id){ask('حذف هذه الغرفة نهائياً؟','حذف',()=>run(async()=>{await api('/topics/'+id,'DELETE');if(S.cur===id)leave();go('feed')},'تم الحذف'))}
+function delM(id){run(()=>api('/msgs/'+id,'DELETE'))}
+function ban(id){if(id===S.me)return;ask('حظر هذا المستخدم؟','حظر',()=>run(()=>api('/bans/'+id,'POST'),'تم الحظر'))}
+function unban(id){run(()=>api('/bans/'+id,'DELETE'),'رُفع الحظر')}
+(function boot(){if(!TOKEN){S.needAuth=true;S.authMode='login';render();return}
+ start().catch(()=>{TOKEN='';localStorage.removeItem('tk');S.needAuth=true;S.authMode='login';render()})})();
+</script>
+</body>
+</html>
